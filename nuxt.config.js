@@ -80,19 +80,19 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    extractCSS: true,
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          styles: {
-            name: 'styles',
-            test: /\.(css|scss|less|vue)$/,
-            chunks: 'all',
-            enforce: true,
-          },
-        },
-      },
-    },
-  },
+  // build: {
+  //   extractCSS: true,
+  //   optimization: {
+  //     splitChunks: {
+  //       cacheGroups: {
+  //         styles: {
+  //           name: 'styles',
+  //           test: /\.(css|scss|less|vue)$/,
+  //           chunks: 'all',
+  //           enforce: true,
+  //         },
+  //       },
+  //     },
+  //   },
+  // },
 }

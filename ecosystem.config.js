@@ -4,7 +4,7 @@ module.exports = {
       name: 'e-wo',
       exec_mode: 'cluster',
       instances: '1', // Or a number of instances
-      script: './node_modules/nuxt/bin/nuxt.js',
+      script: 'app.js',
       args: 'start',
       env: {
         NODE_ENV: 'development',
