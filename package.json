@@ -12,8 +12,10 @@
   "author": "hezongkun@qq.com",
   "license": "MIT",
   "dependencies": {
-    "nuxt": "^2.3.4",
-    "sass": "^1.43.4"
+    "nuxt": "^2.15.8",
+    "sass": "^1.43.4",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.22.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^7.0.0",
@@ -21,8 +23,6 @@
     "@nuxtjs/tailwindcss": "^4.2.1",
     "babel-eslint": "^10.1.0",
     "daisyui": "^1.16.2",
-    "eslint": "^7.22.0",
-    "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-nuxt": "^2.0.0",

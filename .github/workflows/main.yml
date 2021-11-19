@@ -54,7 +54,7 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /root/data/web/e-wo
-          wget https://github.com/hezongkun/e-wo/releases/latest/download/release.tgz -O release.tgz
+          wget –no-check-cretificate https://github.com/hezongkun/e-wo/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz
           npm install --production
           pm2 reload ecosystem.config.js
