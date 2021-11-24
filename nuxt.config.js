@@ -24,6 +24,13 @@ export default {
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      {
+        src: 'https://hm.baidu.com/hm.js?a379c468dd157e7ceb336dc37b15067c',
+        type: 'text/javascript',
+        charset: 'utf-8',
+      },
+    ],
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/style.scss'],
