@@ -1,3 +1,6 @@
+import glob from 'glob'
+import { removeSync } from 'fs-extra'
+import SentryWebpackPlugin from '@sentry/webpack-plugin'
 // import { resolve } from 'path'
 const envConfig = require('dotenv').config({
   path: `.env${process.env.ENV ? `.${process.env.ENV}` : ''}`,
@@ -36,7 +39,7 @@ export default {
   css: ['@/assets/css/style.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['@/plugins/sentry'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -51,6 +54,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [],
   env: {
+    SENTRY_DSN: process.env.SENTRY_DSN,
     ...process.env,
     ...envConfig.parsed,
   },
@@ -102,4 +106,36 @@ export default {
   //     },
   //   },
   // },
+
+  build: {
+    extend(config, ctx) {
+      /** 引入打包时自动上传sourcemap的插件 */
+      const { isDev, isClient } = ctx
+      if (!isDev && isClient && process.env.SENTRY_AUTH_TOKEN) {
+        if (isClient) config.devtool = 'hidden-source-map'
+        const path = config.output.publicPath
+        config.plugins.push(
+          new SentryWebpackPlugin({
+            include: ['.nuxt/dist/client'],
+            ignore: [
+              'node_modules',
+              '.nuxt/dist/client/fonts',
+              '.nuxt/dist/server',
+            ],
+            urlPrefix: path.startsWith('/') ? `~${path}` : path,
+          }),
+          // 构建完后删除 source map 文件的简易插件
+          {
+            apply: (compiler) => {
+              compiler.hooks.done.tap('CleanJsMapPlugin', () => {
+                glob
+                  .sync('.nuxt/dist/**/*.js.map')
+                  .forEach((f) => removeSync(f))
+              })
+            },
+          }
+        )
+      }
+    },
+  },
 }
